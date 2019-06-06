@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MultPlatProject"
+    x:Class="MultPlatProject.NewAuthorPage"
+    Title="Novo Autor">
+
+    <ContentPage.BindingContext>
+        <local:NewAuthorViewModel RequestFailed="Handle_RequestFailed"  
+                                  AuthorAdded="NewAuthorViewModel_AuthorAdded" />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+
+            <Label Text="Nome do Autor"/>
+            <Entry 
+                x:Name="NameEntry"
+                HorizontalOptions="FillAndExpand"
+                Placeholder="Insira um Nome do Autor"
+                Text="{Binding Name}"/>
+
+            <StackLayout 
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                Orientation="Horizontal">
+                <Button Clicked="ToolbarItem_Clicked" Text="Voltar"/>
+                <Button Text="Inserir" Command="{Binding PostCommand}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

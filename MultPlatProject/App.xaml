@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MultPlatProject"
+    x:Class="MultPlatProject.App">
+    
+    <!-- Define a página principal/raiz da aplicação -->
+    <Application.MainPage>
+        
+        <!-- Cria instância de NavigationPage -->
+        <!--<NavigationPage>
+            
+            --><!-- Determina parâmetros passados para o construtor de NavigationPage --><!--
+            <x:Arguments>
+            
+                --><!-- Passa uma instância de AuthorsPage para o construtor,
+                    fazendo com que ela seja a primeira a ser exibida dentro
+                    do NavigationPage --><!--
+                <local:AuthorsPage />
+            </x:Arguments>
+        </NavigationPage>-->
+        <TabbedPage Title="Abas">
+            <TabbedPage.Children>
+                <NavigationPage Title="Autores" Icon="author">
+                    <x:Arguments>
+                        <local:AuthorsPage/>
+                    </x:Arguments>
+                </NavigationPage>
+                <NavigationPage Title="Livros" Icon="book">
+                    <x:Arguments>
+                        <local:BooksPage/>
+                    </x:Arguments>
+                </NavigationPage>
+            </TabbedPage.Children>
+        </TabbedPage>
+    </Application.MainPage>
+</Application>

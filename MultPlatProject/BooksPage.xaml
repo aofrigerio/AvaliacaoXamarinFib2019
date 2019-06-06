@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MultPlatProject"
+    x:Class="MultPlatProject.BooksPage"
+    Title="Livros">
+
+    <!-- Define botões na barra de navegação da tela -->
+    <ContentPage.ToolbarItems>
+        <!-- Adiciona botão de recarregar, com o ícone de recarregar.
+            Quando clicado, executa o comando GetCommand de AuthorsViewModel e
+            consulta os autores novamente. -->
+        <ToolbarItem Command="{Binding GetCommand}" Icon="reload.png"/>
+    </ContentPage.ToolbarItems>
+
+    <!-- Define objeto no qual os elementos visuais da tela farão binding, por padrão -->
+    <ContentPage.BindingContext>
+        <!-- Cria uma instância de AuthorsViewModel que, quando invocar o evento
+            RequestFailed, vai chamar o método Handle_RequestFailed da página.
+            Não pode esquecer de colocar o trecho xmlns:local ali em cima. -->
+        <local:BooksViewModel RequestFailed="Handle_RequestFailed" />
+
+    </ContentPage.BindingContext>
+
+        <!-- Define conteúdo da tela como ListView. Faz binding dos ItemSource para a 
+        propriedade Authors de AuthorsViewModel, a fim de mostrar os autores
+        consultados -->
+ 
+
+    <ContentPage.Content>
+        <StackLayout
+            HorizontalOptions="FillAndExpand">
+            <Entry 
+                x:Name="TitleEntry"
+                Placeholder="Procurar Livro por Autor..."
+                Text="{Binding TitleEntry}"/>
+            <Button Text="Buscar" Command="{Binding GetCommand}"/>
+
+            <ListView ItemsSource="{Binding Books}" 
+                        IsPullToRefreshEnabled="True"
+                        RefreshCommand="{Binding GetCommand}"   
+                        IsRefreshing="{Binding IsLoading}">
+
+                <!-- Define o formato de cada item que for exibido na ListView -->
+                <ListView.ItemTemplate>
+
+                    <!-- Cria instância da classe DataTemplate, porque é lá que guarda o rolê -->
+                    <DataTemplate>
+
+                        <!-- Faz com que cada linha da ListView seja uma TextCell.
+                    Cada instância de TextCell exibida vai estar bindada a uma
+                    instância de Author, assim, faz com que o texto da célula seja
+                    o conteúdo da propriedade Name da instância de Author vinculada -->
+                        <ImageCell Height="30" ImageSource="{Binding Cover}" Text="{Binding Title}" Detail="{Binding Author.Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </StackLayout>
+        
+        
+        </ContentPage.Content>
+            
+</ContentPage>
