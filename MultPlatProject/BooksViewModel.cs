@@ -81,6 +81,7 @@ namespace MultPlatProject
                                  // Author, para consultar os autores.
                                  .AppendPathSegment(typeof(Book).Name)
 
+                                 //Parâmetro para consultar livros. 
                                  .SetQueryParam("where","title like '%" + TitleEntry + "%'")
 
                                  // Namespace Flurl também adiciona extensão em 
